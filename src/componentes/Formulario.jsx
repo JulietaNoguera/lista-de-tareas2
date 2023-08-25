@@ -2,25 +2,26 @@ import React, { useState } from 'react'
 import swal from 'sweetalert'
 export const Formulario = ({agregarTarea}) => {
 
-
+    // hock para cambiar el estado de form empezar vacio
     const [estadoForm, setEstadoForm] = useState(
         {
             nombre:'',
             cantidad:'',
         }
     )
-
+        
     const {nombre, cantidad} = estadoForm
-
+        //agarra lo que esta en los campos
     const onInputChange =({target})=> {
         const {name, value}= target
-        
         setEstadoForm({
         ...estadoForm,
         [name]:value
         })
         
     }
+
+    // mensaje de error si no los campos estan vacios 
     const errores = (event)=>{
       
         event.preventDefault()
@@ -32,6 +33,7 @@ export const Formulario = ({agregarTarea}) => {
         }); 
     
     }
+    //mensaje de que los datos fueron guardados correctamente
     const validacion=(event)=>{
               
         event.preventDefault()
@@ -42,7 +44,7 @@ export const Formulario = ({agregarTarea}) => {
             button:'Aceptar',
             }); 
     }
-    
+    //si los campos estan vacios manda el msj de error , si estan completos los guarda y envìa mensaje de validaciòn
     const onSubmit =(event)=> {
         if (estadoForm.nombre ===''|| estadoForm.cantidad===''){
                 errores(event)

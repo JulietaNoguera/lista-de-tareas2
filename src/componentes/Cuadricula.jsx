@@ -1,6 +1,7 @@
 import React from 'react'
 
 export const Cuadricula = (props) => {
+    //estilo cuadricula s
   return (
     <ul>
               <div className="grid-container">
