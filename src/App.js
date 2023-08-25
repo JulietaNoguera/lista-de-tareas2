@@ -1,24 +1,41 @@
-import logo from './logo.svg';
 import './App.css';
+import ListaDeCompra from './composicion/ListaDeCompras';
+import { Formulario } from './componentes/Formulario';
+import { useState } from 'react';
+import { Cuadricula } from './componentes/Cuadricula';
 
 function App() {
+  let listaCompleta= [ 
+    {nombre:"TAREA", cantidad:1},
+    {nombre:"TAREA", cantidad:2},
+    {nombre:"TAREA", cantidad:10},
+    {nombre:"TAREA", cantidad:5},
+    {nombre:"TAREA", cantidad:8},
+
+  ]
+  const [arreglo,setArreglo]= useState(listaCompleta)
+  const [mostrarFormulario, setMostrarFormulario] = useState(false); 
+  const [cambiarEstilo , setCambiarEstilo] = useState(false);
+
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <h3>Lista de Tareas</h3> 
+    
+      <button type="button" className="btn btn-primary btn-lg" onClick={() => setCambiarEstilo(!cambiarEstilo)}>Mostrar Tareas</button>
+      <button type="button" className="btn btn-secondary btn-lg" onClick={() => setMostrarFormulario(!mostrarFormulario)}>Formulario</button>
+
+      {
+      cambiarEstilo ? (
+        <ListaDeCompra items={arreglo}/>
+      )
+      :(
+        <Cuadricula items={arreglo}/>
+      )
+      }
+      
+      {mostrarFormulario && <Formulario agregarTarea={setArreglo} />}
+    </>
   );
 }
 
